@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="DEIMS-SDR Team">
+    <title>DEIMS-SDR | Status Page</title>
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+	<link rel="stylesheet" href="bootstrap-4.1.3-dist/css/bootstrap.min.css">
+	<script src="bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="js/xml2json.min.js"></script>
+	<script type="text/javascript" src="js/jsts.min.js"></script>
+
+	
+  </head>
+  
+  <body class="py-4">
+    <div class="container">
+
+	  <h1>DEIMS-SDR</h1>
+	  <p class="lead">Site Quality Assurance Tool</p>
+		<input id= "deims_id_text_field_box" type="text" placeholder="Please enter your DEIMS.iD"> <button type="button" onclick="check_site_record()">Check site record</button><br><br>
+		<table class="table">
+		  <thead>
+			<tr>
+			  <th scope="col">Field</th>
+			  <th scope="col">Comment</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr id="boundaries_check_row" class="table-active">
+			  <td><b>Boundaries</b></td>
+			  <td id="boundaries_check_result"></td>
+			</tr>
+		  </tbody>
+		</table>
+	  
+	  <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
+          <div class="col-12 col-md">
+            <small class="d-block mb-3 text-muted">©2020 Umweltbundesamt GmbH</small>			
+          </div>
+          <div class="col-6 col-md">
+            <ul class="list-unstyled text-small">
+			    <li><a href="https://deims.org/about">About</a></li>
+				<li><a href="https://deims.org/terms">Terms</a></li>
+				<li><a href="https://deims.org/imprint">Imprint</a></li>
+				<li><a href="https://deims.org/privacy">Privacy</a></li>
+                <li><a href="https://deims.org/contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+
+	</div> <!-- /container -->
+	</body>
+</html>
+
+	<script>
+	
+	function check_site_record(){
+		var deims_id = document.getElementById('deims_id_text_field_box').value
+		var json_address = "https://deims.org/api/site/" + deims_id;
+			
+		var x = new XMLHttpRequest();
+		x.open("GET", json_address, true);
+		x.onreadystatechange = function () {
+			// on success, do the parsing
+			if (x.readyState == 4 && x.status == 200) {
+			
+				var jsonObj = JSON.parse(x.responseText);
+				
+				// check boundaries
+				if (jsonObj["attributes"]["geographic"]["boundaries"] == null) {
+					document.getElementById('boundaries_check_result').innerHTML = '<div class="text-danger">No boundaries provided</div>';
+					$('#boundaries_check_row').removeClass().addClass('table-danger');
+					return;
+				}
+				var wkt_reader = new jsts.io.WKTReader();
+				var geom = wkt_reader.read(jsonObj["attributes"]["geographic"]["boundaries"]);
+
+				if (geom.isValid()) {
+					document.getElementById('boundaries_check_result').innerHTML = '<div class="text-success">The boundaries geometry is valid.</div>';
+					$('#boundaries_check_row').removeClass().addClass('table-success');
+				}
+				else {
+					document.getElementById('boundaries_check_result').innerHTML = '<div class="text-danger">The boundaries are not valid</div>';
+					$('#boundaries_check_row').removeClass().addClass('table-danger');
+				}
+			}
+			// if there is something wrong with the json request
+			if (x.readyState == 4 && x.status == 500) {
+				$.notify("The JSON record could not be loaded :(", {position:"top right"}, "error");		
+				return;
+			}
+		  
+		};
+		
+		x.send(null);
+		
+		return true;   
+
+	}
+			 
+		function check_boundaries(wkt){
+			var wkt_reader = new jsts.io.WKTReader();
+		}
+	
+	
+		function ping(url_var, cell_id){
+			var row_name = cell_id.substring(0, cell_id.length-7);
+			$.ajax({
+				url: url_var,
+				success: function(result){
+					$(cell_id).html('<div class="text-success">Available</div>');
+					$(row_name).removeClass().addClass('table-success');
+				},     
+				error: function(result){
+					$(cell_id).html('<div class="text-danger">Not Available</div>');
+					$(row_name).removeClass().addClass('table-danger');
+				}
+			});
+		}
+			
+
+		
+	</script>
