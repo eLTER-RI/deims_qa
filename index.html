@@ -23,6 +23,7 @@
 	  <h1>DEIMS-SDR</h1>
 	  <p class="lead">Site Record Quality Assurance Tool</p>
 		<input id= "deims_id_text_field_box" type="text" placeholder="Type in the site name"><br><br>
+		<p>Quality assessment for site record <h3 id="site_name_heading">[...]</h3></p>
 		<table class="table">
 		  <thead>
 			<tr>
@@ -118,6 +119,9 @@
 			if (x.readyState == 4 && x.status == 200) {
 			
 				var jsonObj = JSON.parse(x.responseText);
+				
+				
+				document.getElementById('site_name_heading').innerHTML = jsonObj["title"];
 				
 				// check boundaries
 				if (jsonObj["attributes"]["geographic"]["boundaries"] == null) {
