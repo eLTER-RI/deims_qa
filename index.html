@@ -24,6 +24,7 @@
 	  <p class="lead">Site Record Quality Assurance Tool</p>
 		<input id= "deims_id_text_field_box" type="text" placeholder="Type in the site name"><br><br>
 		<p>Quality assessment for site record <h3 id="site_name_heading">[...]</h3></p>
+		<p id="deims_id_url_container"></p>
 		<table class="table">
 		  <thead>
 			<tr>
@@ -120,8 +121,8 @@
 			
 				var jsonObj = JSON.parse(x.responseText);
 				
-				
-				document.getElementById('site_name_heading').innerHTML = jsonObj["title"];
+				document.getElementById('site_name_heading').innerHTML = jsonObj["title"]; 
+				document.getElementById('deims_id_url_container').innerHTML = ' <a href="https://deims.org/' + deims_id + '">' + 'https://deims.org/' + deims_id + '</a>'; 
 				
 				// check boundaries
 				if (jsonObj["attributes"]["geographic"]["boundaries"] == null) {
