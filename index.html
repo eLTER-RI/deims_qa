@@ -37,6 +37,10 @@
 			  <td><b>Boundaries</b></td>
 			  <td id="boundaries_check_result"></td>
 			</tr>
+			<tr id="shortname_check_row" class="table-active">
+			  <td><b>Short Name</b></td>
+			  <td id="shortname_check_result"></td>
+			</tr>
 		  </tbody>
 		</table>
 	  
@@ -128,7 +132,6 @@
 				if (jsonObj["attributes"]["geographic"]["boundaries"] == null) {
 					document.getElementById('boundaries_check_result').innerHTML = '<div class="text-danger">No boundaries provided</div>';
 					$('#boundaries_check_row').removeClass().addClass('table-danger');
-					return;
 				}
 				var wkt_reader = new jsts.io.WKTReader();
 				var geom = wkt_reader.read(jsonObj["attributes"]["geographic"]["boundaries"]);
@@ -141,6 +144,26 @@
 					document.getElementById('boundaries_check_result').innerHTML = '<div class="text-danger">The boundaries are not valid</div>';
 					$('#boundaries_check_row').removeClass().addClass('table-danger');
 				}
+				
+				// check short name
+				if (jsonObj["attributes"]["general"]["shortName"] == null) {
+					document.getElementById('shortname_check_result').innerHTML = '<div class="text-danger">No short name provided</div>';
+					$('#shortname_check_row').removeClass().addClass('table-danger');
+				}
+				else {
+					if (jsonObj["attributes"]["general"]["shortName"].length > jsonObj["attributes"]["general"]["siteName"].length) {
+						document.getElementById('shortname_check_result').innerHTML = '<div class="text-danger">The short name is longer than the site name.</div>';
+						$('#shortname_check_row').removeClass().addClass('table-danger');
+					} else if (jsonObj["attributes"]["general"]["shortName"].length == jsonObj["attributes"]["general"]["siteName"].length) {
+						document.getElementById('shortname_check_result').innerHTML = '<div class="text-warning">The short name is the same length as the site name.</div>';
+						$('#shortname_check_row').removeClass().addClass('table-warning');
+					}
+					else {
+						$('#shortname_check_row').removeClass().addClass('table-success');
+						document.getElementById('shortname_check_result').innerHTML = '<div class="text-success"></div>';
+					}
+				}
+				
 			}
 			// if there is something wrong with the json request
 			if (x.readyState == 4 && x.status == 500) {
