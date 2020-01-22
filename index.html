@@ -13,6 +13,7 @@
 	<script src="js/jquery-3.4.1.min.js"></script>
 	<script src="js/xml2json.min.js"></script>
 	<script src="js/jsts.min.js"></script>
+	<script src="js/qa_checks.js"></script>
 	<script src="js/awesomplete.min.js"></script>
 	<link rel="stylesheet" href="css/awesomplete.css" />
   </head>
@@ -33,6 +34,10 @@
 			</tr>
 		  </thead>
 		  <tbody>
+		    <tr id="completeness_check_row" class="table-active">
+			  <td><b>Completeness</b></td>
+			  <td id="completeness_check_result"></td>
+			</tr>
 			<tr id="boundaries_check_row" class="table-active">
 			  <td><b>Boundaries</b></td>
 			  <td id="boundaries_check_result"></td>
@@ -127,6 +132,18 @@
 				
 				document.getElementById('site_name_heading').innerHTML = jsonObj["title"]; 
 				document.getElementById('deims_id_url_container').innerHTML = ' <a href="https://deims.org/' + deims_id + '">' + 'https://deims.org/' + deims_id + '</a>'; 
+				
+				// check completeness
+				/*
+				if (calculate_completeness(jsonObj) == '100%') {
+					document.getElementById('boundaries_check_result').innerHTML = '<div class="text-success">The boundaries geometry is valid.</div>';
+					$('#boundaries_check_row').removeClass().addClass('table-success');
+				}
+				else {
+					document.getElementById('boundaries_check_result').innerHTML = '<div class="text-danger">The boundaries are not valid</div>';
+					$('#boundaries_check_row').removeClass().addClass('table-danger');
+				} */
+				calculate_completeness(jsonObj);
 				
 				// check boundaries
 				if (jsonObj["attributes"]["geographic"]["boundaries"] == null) {
