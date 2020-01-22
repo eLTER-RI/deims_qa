@@ -133,18 +133,25 @@
 					document.getElementById('boundaries_check_result').innerHTML = '<div class="text-danger">No boundaries provided</div>';
 					$('#boundaries_check_row').removeClass().addClass('table-danger');
 				}
-				var wkt_reader = new jsts.io.WKTReader();
-				var geom = wkt_reader.read(jsonObj["attributes"]["geographic"]["boundaries"]);
-
-				if (geom.isValid()) {
-					document.getElementById('boundaries_check_result').innerHTML = '<div class="text-success">The boundaries geometry is valid.</div>';
-					$('#boundaries_check_row').removeClass().addClass('table-success');
-				}
 				else {
-					document.getElementById('boundaries_check_result').innerHTML = '<div class="text-danger">The boundaries are not valid</div>';
-					$('#boundaries_check_row').removeClass().addClass('table-danger');
+					var wkt_reader = new jsts.io.WKTReader();
+					try {
+						var geom = wkt_reader.read(jsonObj["attributes"]["geographic"]["boundaries"]);
+					}
+					catch(err) {
+						document.getElementById("boundaries_check_result").innerHTML = '<div class="text-danger">The geometry is not valid: ' + err.message + '</div>';
+						$('#boundaries_check_row').removeClass().addClass('table-danger');
+					}
+
+					if (geom.isValid()) {
+						document.getElementById('boundaries_check_result').innerHTML = '<div class="text-success">The boundaries geometry is valid.</div>';
+						$('#boundaries_check_row').removeClass().addClass('table-success');
+					}
+					else {
+						document.getElementById('boundaries_check_result').innerHTML = '<div class="text-danger">The boundaries are not valid</div>';
+						$('#boundaries_check_row').removeClass().addClass('table-danger');
+					}
 				}
-				
 				// check short name
 				if (jsonObj["attributes"]["general"]["shortName"] == null) {
 					document.getElementById('shortname_check_result').innerHTML = '<div class="text-danger">No short name provided</div>';
