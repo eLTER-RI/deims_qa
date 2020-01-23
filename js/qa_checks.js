@@ -28,9 +28,9 @@ function calculate_completeness(jsonObj){
 	site_attributes['focusDesignScale']['experiments']['scale'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Scale of Experiments</li>';
 	site_attributes['focusDesignScale']['observations']['design'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Design of Observations</li>';
 	site_attributes['focusDesignScale']['observations']['scale'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Scale of Observation</li>';
-	site_attributes['infrastructure']['accessibleAllYear'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Accessible all year</li>';
-	site_attributes['infrastructure']['permanentPowerSupply'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Permanent Power Supply</li>';
-	site_attributes['infrastructure']['operation']['permanent'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Permanent Operation</li>';
+	site_attributes['infrastructure']['accessibleAllYear'] != null ? number_of_filled_fields++ : list_of_missing_fields += '<li>Accessible all year</li>';
+	site_attributes['infrastructure']['permanentPowerSupply'] != null ? number_of_filled_fields++ : list_of_missing_fields += '<li>Permanent Power Supply</li>';
+	site_attributes['infrastructure']['operation']['permanent'] != null ? number_of_filled_fields++ : list_of_missing_fields += '<li>Permanent Operation</li>';
 	site_attributes['infrastructure']['data']['policy']['rights'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Data policy</li>';
 	site_attributes['infrastructure']['data']['location'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Data storage location</li>';
 	
