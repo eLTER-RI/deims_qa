@@ -84,6 +84,9 @@
 
 <script>
 	
+
+
+
 	var autocomplete_field = document.getElementById("deims_id_text_field_box");
 	var awesomplete = new Awesomplete(autocomplete_field);
 	var fetch_url = "https://deims.org/geoserver/deims/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + "deims:deims_all_sites" + "&outputFormat=application%2Fjson";
@@ -130,7 +133,14 @@
 		check_site_record(deims_id);
 	});
 
-	
+	// for reading the deims.id from the url parameters
+	if (window.location.search) {
+		var urlParams = new URLSearchParams(window.location.search);
+		if (urlParams.get('id')) {
+			check_site_record(urlParams.get('id'));
+		}
+	}
+
 	function check_site_record(deims_id){
 		var json_address = "https://deims.org/api/site/" + deims_id;
 			
@@ -142,7 +152,13 @@
 			
 				var jsonObj = JSON.parse(x.responseText);
 				
-				document.getElementById('site_name_heading').innerHTML = jsonObj["title"]; 
+				if (jsonObj["title"]) {
+					document.getElementById('site_name_heading').innerHTML = jsonObj["title"];
+				}
+				else {
+					document.getElementById('site_name_heading').innerHTML = 'Incorrect ID provided';
+					return true;
+				}
 				document.getElementById('deims_id_url_container').innerHTML = ' <a href="https://deims.org/' + deims_id + '">' + 'https://deims.org/' + deims_id + '</a>'; 
 				
 				calculate_completeness(jsonObj);
