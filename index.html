@@ -151,7 +151,7 @@
 			if (x.readyState == 4 && x.status == 200) {
 			
 				var jsonObj = JSON.parse(x.responseText);
-				
+
 				if (jsonObj["title"]) {
 					document.getElementById('site_name_heading').innerHTML = jsonObj["title"];
 				}
@@ -161,6 +161,9 @@
 				}
 				document.getElementById('deims_id_url_container').innerHTML = ' <a href="https://deims.org/' + deims_id + '">' + 'https://deims.org/' + deims_id + '</a>'; 
 				
+				// update url in address bar
+				history.pushState({}, "Site Record Quality Assurance Tool - " + jsonObj["title"], "?id=" + deims_id)
+
 				calculate_completeness(jsonObj);
 				
 				// check boundaries
