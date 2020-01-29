@@ -31,11 +31,10 @@ function calculate_completeness(jsonObj){
 	site_attributes['infrastructure']['accessibleAllYear'] != null ? number_of_filled_fields++ : list_of_missing_fields += '<li>Accessible all year</li>';
 	site_attributes['infrastructure']['permanentPowerSupply'] != null ? number_of_filled_fields++ : list_of_missing_fields += '<li>Permanent Power Supply</li>';
 	site_attributes['infrastructure']['operation']['permanent'] != null ? number_of_filled_fields++ : list_of_missing_fields += '<li>Permanent Operation</li>';
-	site_attributes['infrastructure']['data']['policy']['rights'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Data policy</li>';
 	site_attributes['infrastructure']['data']['location'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Data storage location</li>';
 	
 	list_of_missing_fields += '</ul>'
-	var percentage = (number_of_filled_fields/29*100).toFixed(2) + '%';
+	var percentage = (number_of_filled_fields/28*100).toFixed(2) + '%';
 	
 	if (percentage == '100.00%') {
 		document.getElementById('completeness_check_result').innerHTML = '<div class="text-success">' + percentage + '</div>';
