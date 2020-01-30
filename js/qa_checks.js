@@ -17,7 +17,7 @@ function calculate_completeness(jsonObj){
 	site_attributes['geographic']['country'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Country</li>';
 	site_attributes['geographic']['elevation']['min'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Elevation (min)</li>';
 	site_attributes['geographic']['elevation']['max'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Elevation (max)</li>';
-	site_attributes['geographic']['size']['value'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Size</li>';
+	site_attributes['geographic']['size']['value'] != null ? number_of_filled_fields++ : list_of_missing_fields += '<li>Size</li>';
 	site_attributes['environmentalCharacteristics']['airTemperature']['avg'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Air Temperature (avg)</li>';
 	site_attributes['environmentalCharacteristics']['biome'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Biome</li>';
 	site_attributes['environmentalCharacteristics']['ecosystemAndLanduse'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Ecosystem and Land Use</li>';

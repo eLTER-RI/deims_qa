@@ -58,6 +58,10 @@
 			  <td><b>Research Topics</b></td>
 			  <td id="research_topics_check_result"></td>
 			</tr>
+			<tr id="size_check_row" class="table-active">
+			  <td><b>Size</b></td>
+			  <td id="size_check_result"></td>
+			</tr>
 		  </tbody>
 		</table>
 	  
@@ -239,10 +243,22 @@
 					$('#research_topics_check_row').removeClass().addClass('table-success');
 					document.getElementById('research_topics_check_result').innerHTML = '<div class="text-success">✓</div>';
 				}
+				// size
+				if (jsonObj["attributes"]["geographic"]["size"]['value'] == null) {
+					document.getElementById('size_check_result').innerHTML = '<div class="text-danger">No size provided.</div>';
+					$('#size_check_row').removeClass().addClass('table-danger');
+				}
+				else if ((jsonObj["attributes"]["geographic"]["size"]['value']) == 0) {
+					document.getElementById('size_check_result').innerHTML = '<div class="text-warning">A size value of 0 can cause issues for some analyses.</div>';
+					$('#size_check_row').removeClass().addClass('table-warning');
+				}
+				else {
+					$('#size_check_row').removeClass().addClass('table-success');
+					document.getElementById('size_check_result').innerHTML = '<div class="text-success">✓</div>';
+				}
 				
 				// check geographic topology
 				
-				// test Ficuzza SIC1 - Italy
 				if (jsonObj["attributes"]["geographic"]["boundaries"] && jsonObj["attributes"]["geographic"]["coordinates"]) {
 					
 					if (coords_geom.within(geom)) {
