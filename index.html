@@ -26,6 +26,7 @@
 		<input id= "deims_id_text_field_box" type="text" placeholder="Type in the site name"><br><br>
 		<p>Quality assessment for site record: <h3 id="site_name_heading">[...]</h3></p>
 		<p id="deims_id_url_container"></p>
+		<p id="results_summary_container"></p>
 		<table class="table">
 		  <thead>
 			<tr>
@@ -88,9 +89,6 @@
 
 <script>
 	
-
-
-
 	var autocomplete_field = document.getElementById("deims_id_text_field_box");
 	var awesomplete = new Awesomplete(autocomplete_field);
 	var fetch_url = "https://deims.org/geoserver/deims/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + "deims:deims_all_sites" + "&outputFormat=application%2Fjson";
@@ -165,6 +163,9 @@
 				}
 				document.getElementById('deims_id_url_container').innerHTML = ' <a href="https://deims.org/' + deims_id + '">' + 'https://deims.org/' + deims_id + '</a>'; 
 				
+				number_of_issues = 0;
+				number_of_potential_issues = 0;
+				
 				// update url in address bar
 				history.pushState({}, "Site Record Quality Assurance Tool - " + jsonObj["title"], "?id=" + deims_id)
 
@@ -174,6 +175,7 @@
 				if (jsonObj["attributes"]["geographic"]["boundaries"] == null) {
 					document.getElementById('boundaries_check_result').innerHTML = '<div class="text-danger">No boundaries provided</div>';
 					$('#boundaries_check_row').removeClass().addClass('table-danger');
+					number_of_issues++;
 				}
 				else {
 					var wkt_reader = new jsts.io.WKTReader();
@@ -196,20 +198,25 @@
 					else {
 						document.getElementById('boundaries_check_result').innerHTML = '<div class="text-danger">The boundaries are not valid</div>';
 						$('#boundaries_check_row').removeClass().addClass('table-danger');
+						number_of_issues++;
 					}
 				}
 				// check short name
 				if (jsonObj["attributes"]["general"]["shortName"] == null) {
 					document.getElementById('shortname_check_result').innerHTML = '<div class="text-danger">No short name provided</div>';
 					$('#shortname_check_row').removeClass().addClass('table-danger');
+					number_of_issues++;
 				}
 				else {
 					if (jsonObj["attributes"]["general"]["shortName"].length > jsonObj["attributes"]["general"]["siteName"].length) {
 						document.getElementById('shortname_check_result').innerHTML = '<div class="text-danger">The short name is longer than the site name.</div>';
 						$('#shortname_check_row').removeClass().addClass('table-danger');
+						number_of_issues++;
 					} else if (jsonObj["attributes"]["general"]["shortName"].length == jsonObj["attributes"]["general"]["siteName"].length) {
 						document.getElementById('shortname_check_result').innerHTML = '<div class="text-warning">The short name is the same length as the site name.</div>';
+						number_of_potential_issues++;
 						$('#shortname_check_row').removeClass().addClass('table-warning');
+						
 					}
 					else {
 						$('#shortname_check_row').removeClass().addClass('table-success');
@@ -220,10 +227,12 @@
 				if (jsonObj["attributes"]["general"]["abstract"] == null) {
 					document.getElementById('abstract_check_result').innerHTML = '<div class="text-danger">No site description provided.</div>';
 					$('#abstract_check_row').removeClass().addClass('table-danger');
+					number_of_issues++;
 				}
 				else if ((jsonObj["attributes"]["general"]["abstract"]).length < 200) {
 					document.getElementById('abstract_check_result').innerHTML = '<div class="text-warning">The site description is very short.</div>';
 					$('#abstract_check_row').removeClass().addClass('table-warning');
+					number_of_potential_issues++;
 				}
 				else {
 					$('#abstract_check_row').removeClass().addClass('table-success');
@@ -234,10 +243,12 @@
 				if (jsonObj["attributes"]["focusDesignScale"]["researchTopics"] == null) {
 					document.getElementById('research_topics_check_result').innerHTML = '<div class="text-danger">No research topics provided.</div>';
 					$('#research_topics_check_row').removeClass().addClass('table-danger');
+					number_of_issues++;
 				}
 				else if ((jsonObj["attributes"]["focusDesignScale"]["researchTopics"]).length < 3) {
 					document.getElementById('research_topics_check_result').innerHTML = '<div class="text-warning">Only very few research topics ticked.</div>';
 					$('#research_topics_check_row').removeClass().addClass('table-warning');
+					number_of_potential_issues++;
 				}
 				else {
 					$('#research_topics_check_row').removeClass().addClass('table-success');
@@ -247,10 +258,12 @@
 				if (jsonObj["attributes"]["geographic"]["size"]['value'] == null) {
 					document.getElementById('size_check_result').innerHTML = '<div class="text-danger">No size provided.</div>';
 					$('#size_check_row').removeClass().addClass('table-danger');
+					number_of_issues++;
 				}
 				else if ((jsonObj["attributes"]["geographic"]["size"]['value']) == 0) {
 					document.getElementById('size_check_result').innerHTML = '<div class="text-warning">A size value of 0 can cause issues for some analyses.</div>';
 					$('#size_check_row').removeClass().addClass('table-warning');
+					number_of_potential_issues++;
 				}
 				else {
 					$('#size_check_row').removeClass().addClass('table-success');
@@ -258,7 +271,6 @@
 				}
 				
 				// check geographic topology
-				
 				if (jsonObj["attributes"]["geographic"]["boundaries"] && jsonObj["attributes"]["geographic"]["coordinates"]) {
 					
 					if (coords_geom.within(geom)) {
@@ -268,12 +280,27 @@
 					else {
 						document.getElementById('topology_check_result').innerHTML = '<div class="text-danger">The centroid coordinates are outside of the provided boundaries.</div>';
 						$('#topology_check_row').removeClass().addClass('table-danger');
+						number_of_issues++;
 					}
 					
 				}
 				else {
 					$('#topology_check_row').removeClass().addClass('table-active');
 					document.getElementById('topology_check_result').innerHTML = '<div>Cannot be checked without coordinates/boundaries</div>';
+				}
+				
+				
+				document.getElementById('results_summary_container').innerHTML = "";
+
+				// print result summary
+				if (number_of_issues == 0 && number_of_potential_issues == 0) {
+					document.getElementById('results_summary_container').innerHTML = "<div class='text-success'>We didn't find any issues with this record.</div>";
+				}
+				if (number_of_issues != 0) {
+					document.getElementById('results_summary_container').innerHTML = '<div class="text-danger">We found ' + number_of_issues + ' critical issue(s).</div>';
+				}
+				if (number_of_potential_issues != 0) {
+					document.getElementById('results_summary_container').innerHTML += '<div class="text-warning">We found ' + number_of_potential_issues + ' potential issue(s).</div>';
 				}
 				
 			}
