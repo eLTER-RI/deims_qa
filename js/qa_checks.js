@@ -43,6 +43,7 @@ function calculate_completeness(jsonObj){
 	else {
 		document.getElementById('completeness_check_result').innerHTML = '<div class="text-danger">Record not complete (' + percentage + ')</div>' + '<p>Following field(s) are missing: </p>' + list_of_missing_fields;
 		$('#completeness_check_row').removeClass().addClass('table-danger');
+		number_of_issues++;
 	}
 
 }
