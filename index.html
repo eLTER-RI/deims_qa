@@ -63,6 +63,10 @@
 			  <td><b>Size</b></td>
 			  <td id="size_check_result"></td>
 			</tr>
+			<tr id="affiliation_check_row" class="table-active">
+				<td><b>Affiliation</b></td>
+				<td id="affiliation_check_result"></td>
+			</tr>
 		  </tbody>
 		</table>
 	  
@@ -237,6 +241,33 @@
 				else {
 					$('#abstract_check_row').removeClass().addClass('table-success');
 					document.getElementById('abstract_check_result').innerHTML = '<div class="text-success">✓</div>';
+				}
+				
+				// affiliation
+				if (jsonObj["attributes"]["affiliation"]["networks"] == null) {
+					// no affiliation available
+					$('#affiliation_check_row').removeClass().addClass('table-active');
+					document.getElementById('affiliation_check_result').innerHTML = '<div>No network/RI affiliation provided or existant</div>';
+				}
+				else {
+					var affiliation_issue_found = false;
+					for (var i = 0; i < jsonObj["attributes"]["affiliation"]["networks"].length; i++) {
+						if (jsonObj["attributes"]["affiliation"]["networks"][i]["verified"] == false) {
+							affiliation_issue_found = true;
+							break;
+						}
+					}
+
+					if (affiliation_issue_found) {
+						document.getElementById('affiliation_check_result').innerHTML = '<div class="text-warning">There is unverified network/RI affiliation</div>';
+						$('#affiliation_check_row').removeClass().addClass('table-warning');
+						number_of_potential_issues++;
+					}
+					else {
+						$('#affiliation_check_row').removeClass().addClass('table-success');
+						document.getElementById('affiliation_check_result').innerHTML = '<div class="text-success">✓</div>';
+					}
+					
 				}
 				
 				// research topics
