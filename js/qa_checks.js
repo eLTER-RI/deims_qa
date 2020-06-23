@@ -1,4 +1,4 @@
-function calculate_completeness(jsonObj){ 
+function calculate_completeness(jsonObj) { 
 	
 	var number_of_filled_fields = 0;
 	var site_attributes = jsonObj['attributes'];
