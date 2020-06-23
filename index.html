@@ -306,11 +306,10 @@
 				}
 				
 				// parent site
-				console.log(jsonObj["attributes"]["general"]["hierarchy"]["parent"][0]);
 				if (jsonObj["attributes"]["general"]["hierarchy"]["parent"] != null && jsonObj["attributes"]["general"]["hierarchy"]["parent"][0]["id"]["suffix"] == deims_id ) {
-						document.getElementById('parent_check_result').innerHTML = '<div class="text-danger">Circular reference: The site is its own parent.</div>';
-						$('#parent_check_row').removeClass().addClass('table-danger');
-						number_of_issues++;
+					document.getElementById('parent_check_result').innerHTML = '<div class="text-danger">Circular reference: The site is its own parent.</div>';
+					$('#parent_check_row').removeClass().addClass('table-danger');
+					number_of_issues++;
 				}
 				else {
 					$('#parent_check_row').removeClass().addClass('table-success');
