@@ -67,6 +67,10 @@
 				<td><b>Affiliation</b></td>
 				<td id="affiliation_check_result"></td>
 			</tr>
+			<tr id="parent_check_row" class="table-active">
+				<td><b>Parent Site</b></td>
+				<td id="parent_check_result"></td>
+			</tr>
 		  </tbody>
 		</table>
 	  
@@ -299,6 +303,18 @@
 				else {
 					$('#size_check_row').removeClass().addClass('table-success');
 					document.getElementById('size_check_result').innerHTML = '<div class="text-success">✓</div>';
+				}
+				
+				// parent site
+				console.log(jsonObj["attributes"]["general"]["hierarchy"]["parent"][0]);
+				if (jsonObj["attributes"]["general"]["hierarchy"]["parent"] != null && jsonObj["attributes"]["general"]["hierarchy"]["parent"][0]["id"]["suffix"] == deims_id ) {
+						document.getElementById('parent_check_result').innerHTML = '<div class="text-danger">Circular reference: The site is its own parent.</div>';
+						$('#parent_check_row').removeClass().addClass('table-danger');
+						number_of_issues++;
+				}
+				else {
+					$('#parent_check_row').removeClass().addClass('table-success');
+					document.getElementById('parent_check_result').innerHTML = '<div class="text-success">✓</div>';
 				}
 				
 				// check geographic topology
