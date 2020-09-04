@@ -16,6 +16,11 @@
 	<script src="js/qa_checks.js"></script>
 	<script src="js/awesomplete.min.js"></script>
 	<link rel="stylesheet" href="css/awesomplete.css" />
+	<style type="text/css">
+		.custom_warning_text {
+			color: #856404;
+		}
+	</style>
   </head>
   
   <body class="py-4">
@@ -221,7 +226,7 @@
 						$('#shortname_check_row').removeClass().addClass('table-danger');
 						number_of_issues++;
 					} else if (jsonObj["attributes"]["general"]["shortName"].length == jsonObj["attributes"]["general"]["siteName"].length) {
-						document.getElementById('shortname_check_result').innerHTML = '<div class="text-warning">The short name is the same length as the site name.</div>';
+						document.getElementById('shortname_check_result').innerHTML = '<div class="custom_warning_text">The short name is the same length as the site name.</div>';
 						number_of_potential_issues++;
 						$('#shortname_check_row').removeClass().addClass('table-warning');
 						
@@ -238,7 +243,7 @@
 					number_of_issues++;
 				}
 				else if ((jsonObj["attributes"]["general"]["abstract"]).length < 200) {
-					document.getElementById('abstract_check_result').innerHTML = '<div class="text-warning">The site description is very short.</div>';
+					document.getElementById('abstract_check_result').innerHTML = '<div class="custom_warning_text">The site description is very short.</div>';
 					$('#abstract_check_row').removeClass().addClass('table-warning');
 					number_of_potential_issues++;
 				}
@@ -263,7 +268,7 @@
 					}
 
 					if (affiliation_issue_found) {
-						document.getElementById('affiliation_check_result').innerHTML = '<div class="text-warning">There is unverified network/RI affiliation</div>';
+						document.getElementById('affiliation_check_result').innerHTML = '<div class="custom_warning_text">There is unverified network/RI affiliation</div>';
 						$('#affiliation_check_row').removeClass().addClass('table-warning');
 						number_of_potential_issues++;
 					}
@@ -281,7 +286,7 @@
 					number_of_issues++;
 				}
 				else if ((jsonObj["attributes"]["focusDesignScale"]["researchTopics"]).length < 3) {
-					document.getElementById('research_topics_check_result').innerHTML = '<div class="text-warning">Only very few research topics ticked.</div>';
+					document.getElementById('research_topics_check_result').innerHTML = '<div class="custom_warning_text">Only very few research topics ticked.</div>';
 					$('#research_topics_check_row').removeClass().addClass('table-warning');
 					number_of_potential_issues++;
 				}
@@ -296,7 +301,7 @@
 					number_of_issues++;
 				}
 				else if ((jsonObj["attributes"]["geographic"]["size"]['value']) == 0) {
-					document.getElementById('size_check_result').innerHTML = '<div class="text-warning">A size value of 0 can cause issues for some analyses.</div>';
+					document.getElementById('size_check_result').innerHTML = '<div class="custom_warning_text">A size value of 0 can cause issues for some analyses.</div>';
 					$('#size_check_row').removeClass().addClass('table-warning');
 					number_of_potential_issues++;
 				}
@@ -346,7 +351,7 @@
 					document.getElementById('results_summary_container').innerHTML = '<div class="text-danger">We found ' + number_of_issues + ' critical issue(s).</div>';
 				}
 				if (number_of_potential_issues != 0) {
-					document.getElementById('results_summary_container').innerHTML += '<div class="text-warning">We found ' + number_of_potential_issues + ' potential issue(s).</div>';
+					document.getElementById('results_summary_container').innerHTML += '<div class="custom_warning_text">We found ' + number_of_potential_issues + ' potential issue(s).</div>';
 				}
 				
 			}
