@@ -243,7 +243,7 @@
 					number_of_issues++;
 				}
 				else if ((jsonObj["attributes"]["general"]["abstract"]).length < 200) {
-					document.getElementById('abstract_check_result').innerHTML = '<div class="custom_warning_text">The site description is very short.</div>';
+					document.getElementById('abstract_check_result').innerHTML = '<div class="text-warning">The site description is very short.</div>';
 					$('#abstract_check_row').removeClass().addClass('table-warning');
 					number_of_potential_issues++;
 				}
