@@ -6,7 +6,6 @@ function calculate_completeness(jsonObj) {
 	
 	site_attributes['general']['siteName'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Site Name</li>';
 	site_attributes['general']['abstract'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Description</li>';
-	site_attributes['general']['purpose'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Purpose</li>';
 	site_attributes['general']['status'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Site Status</li>';
 	site_attributes['general']['yearEstablished'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Year Established</li>';
 	site_attributes['general']['siteType'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Site Type</li>';
@@ -34,7 +33,7 @@ function calculate_completeness(jsonObj) {
 	site_attributes['infrastructure']['data']['location'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Data storage location</li>';
 	
 	list_of_missing_fields += '</ul>'
-	var percentage = (number_of_filled_fields/28*100).toFixed(2) + '%';
+	var percentage = (number_of_filled_fields/27*100).toFixed(2) + '%';
 	
 	if (percentage == '100.00%') {
 		document.getElementById('completeness_check_result').innerHTML = '<div class="text-success">' + percentage + '</div>';
