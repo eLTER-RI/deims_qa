@@ -21,8 +21,7 @@ function calculate_completeness(jsonObj) {
 	site_attributes['environmentalCharacteristics']['biome'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Biome</li>';
 	site_attributes['environmentalCharacteristics']['ecosystemAndLanduse'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Ecosystem and Land Use</li>';
 	site_attributes['environmentalCharacteristics']['precipitation']['annual'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Annual Precipitation</li>';
-	site_attributes['focusDesignScale']['parameters'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Parameters</li>';
-	site_attributes['focusDesignScale']['researchTopics'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Research Topics</li>';
+	site_attributes['focusDesignScale']['parameters'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Observed properties</li>';
 	site_attributes['focusDesignScale']['experiments']['design'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Design of Experiments</li>';
 	site_attributes['focusDesignScale']['experiments']['scale'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Scale of Experiments</li>';
 	site_attributes['focusDesignScale']['observations']['design'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Design of Observations</li>';
@@ -32,7 +31,7 @@ function calculate_completeness(jsonObj) {
 	site_attributes['infrastructure']['operation']['permanent'] != null ? number_of_filled_fields++ : list_of_missing_fields += '<li>Permanent Operation</li>';
 
 	list_of_missing_fields += '</ul>'
-	var percentage = (number_of_filled_fields/26*100).toFixed(2) + '%';
+	var percentage = (number_of_filled_fields/25*100).toFixed(2) + '%';
 	
 	if (percentage == '100.00%') {
 		document.getElementById('completeness_check_result').innerHTML = '<div class="text-success">' + percentage + '</div>';
