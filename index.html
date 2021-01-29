@@ -60,10 +60,6 @@
 			  <td><b>Abstract</b></td>
 			  <td id="abstract_check_result"></td>
 			</tr>
-			<tr id="research_topics_check_row" class="table-active">
-			  <td><b>Research Topics</b></td>
-			  <td id="research_topics_check_result"></td>
-			</tr>
 			<tr id="size_check_row" class="table-active">
 			  <td><b>Size</b></td>
 			  <td id="size_check_result"></td>
@@ -279,21 +275,6 @@
 					
 				}
 				
-				// research topics
-				if (jsonObj["attributes"]["focusDesignScale"]["researchTopics"] == null) {
-					document.getElementById('research_topics_check_result').innerHTML = '<div class="text-danger">No research topics provided.</div>';
-					$('#research_topics_check_row').removeClass().addClass('table-danger');
-					number_of_issues++;
-				}
-				else if ((jsonObj["attributes"]["focusDesignScale"]["researchTopics"]).length < 3) {
-					document.getElementById('research_topics_check_result').innerHTML = '<div class="custom_warning_text">Only very few research topics ticked.</div>';
-					$('#research_topics_check_row').removeClass().addClass('table-warning');
-					number_of_potential_issues++;
-				}
-				else {
-					$('#research_topics_check_row').removeClass().addClass('table-success');
-					document.getElementById('research_topics_check_result').innerHTML = '<div class="text-success">✓</div>';
-				}
 				// size
 				if (jsonObj["attributes"]["geographic"]["size"]['value'] == null) {
 					document.getElementById('size_check_result').innerHTML = '<div class="text-danger">No size provided.</div>';
@@ -323,7 +304,6 @@
 				
 				// check geographic topology
 				if (jsonObj["attributes"]["geographic"]["boundaries"] && jsonObj["attributes"]["geographic"]["coordinates"]) {
-					
 					if (coords_geom.within(geom)) {
 						document.getElementById('topology_check_result').innerHTML = '<div class="text-success">✓</div>';
 						$('#topology_check_row').removeClass().addClass('table-success');
@@ -332,8 +312,7 @@
 						document.getElementById('topology_check_result').innerHTML = '<div class="text-danger">The centroid coordinates are outside of the provided boundaries.</div>';
 						$('#topology_check_row').removeClass().addClass('table-danger');
 						number_of_issues++;
-					}
-					
+					}	
 				}
 				else {
 					$('#topology_check_row').removeClass().addClass('table-active');
