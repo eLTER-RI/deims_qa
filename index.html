@@ -60,6 +60,10 @@
 			  <td><b>Abstract</b></td>
 			  <td id="abstract_check_result"></td>
 			</tr>
+			<tr id="observed_properties_check_row" class="table-active">
+				<td><b>Observed Properties</b></td>
+				<td id="observed_properties_check_result"></td>
+			</tr>
 			<tr id="size_check_row" class="table-active">
 			  <td><b>Size</b></td>
 			  <td id="size_check_result"></td>
@@ -246,6 +250,21 @@
 				else {
 					$('#abstract_check_row').removeClass().addClass('table-success');
 					document.getElementById('abstract_check_result').innerHTML = '<div class="text-success">✓</div>';
+				}
+				// observed properties
+				if (jsonObj["attributes"]["focusDesignScale"]["parameters"] == null) {
+					document.getElementById('observed_properties_check_result').innerHTML = '<div class="text-danger">No observed properties provided.</div>';
+					$('#observed_properties_check_row').removeClass().addClass('table-danger');
+					number_of_issues++;
+				}
+				else if ((jsonObj["attributes"]["focusDesignScale"]["parameters"]).length < 5) {
+					document.getElementById('observed_properties_check_result').innerHTML = '<div class="text-warning">Only few observed properties provided.</div>';
+					$('#observed_properties_check_row').removeClass().addClass('table-warning');
+					number_of_potential_issues++;
+				}
+				else {
+					$('#observed_properties_check_row').removeClass().addClass('table-success');
+					document.getElementById('observed_properties_check_result').innerHTML = '<div class="text-success">✓</div>';
 				}
 				
 				// affiliation
