@@ -243,7 +243,7 @@
 					number_of_issues++;
 				}
 				else if ((jsonObj["attributes"]["general"]["abstract"]).length < 200) {
-					document.getElementById('abstract_check_result').innerHTML = '<div class="text-warning">The site description is very short.</div>';
+					document.getElementById('abstract_check_result').innerHTML = '<div class="custom_warning_text">The site description is very short.</div>';
 					$('#abstract_check_row').removeClass().addClass('table-warning');
 					number_of_potential_issues++;
 				}
@@ -258,7 +258,7 @@
 					number_of_issues++;
 				}
 				else if ((jsonObj["attributes"]["focusDesignScale"]["parameters"]).length < 5) {
-					document.getElementById('observed_properties_check_result').innerHTML = '<div class="text-warning">Only few observed properties provided.</div>';
+					document.getElementById('observed_properties_check_result').innerHTML = '<div class="custom_warning_text">Only few observed properties provided.</div>';
 					$('#observed_properties_check_row').removeClass().addClass('table-warning');
 					number_of_potential_issues++;
 				}
@@ -349,7 +349,7 @@
 					document.getElementById('results_summary_container').innerHTML = '<div class="text-danger">We found ' + number_of_issues + ' critical issue(s).</div>';
 				}
 				if (number_of_potential_issues != 0) {
-					document.getElementById('results_summary_container').innerHTML += '<div class="custom_warning_text">We found ' + number_of_potential_issues + ' potential issue(s).</div>';
+					document.getElementById('results_summary_container').innerHTML += '<div class="text-warning">We found ' + number_of_potential_issues + ' potential issue(s).</div>';
 				}
 				
 			}
