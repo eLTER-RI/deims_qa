@@ -104,7 +104,7 @@
 	
 	var autocomplete_field = document.getElementById("deims_id_text_field_box");
 	var awesomplete = new Awesomplete(autocomplete_field);
-	var fetch_url = "https://deims.org/geoserver/deims/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + "deims:deims_all_sites" + "&outputFormat=application%2Fjson";
+	var fetch_url = "https://deims.org/geoserver/deims/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + "deims:deims_qa_sites" + "&outputFormat=application%2Fjson";
 	var site_names = [];
 	var site_names_appendix = [];
 	$.getJSON(fetch_url, function (data) {
