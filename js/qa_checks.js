@@ -18,7 +18,7 @@ function calculate_completeness(jsonObj) {
 	site_attributes['geographic']['size']['value'] != null ? number_of_filled_fields++ : list_of_missing_fields += '<li>Size</li>';
 	site_attributes['environmentalCharacteristics']['airTemperature']['avg'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Air Temperature (avg)</li>';
 	site_attributes['environmentalCharacteristics']['biome'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Biome</li>';
-	site_attributes['environmentalCharacteristics']['ecosystemAndLanduse'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Ecosystem and Land Use</li>';
+	site_attributes['environmentalCharacteristics']['ecosystemType'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Ecosystem Type</li>';
 	site_attributes['environmentalCharacteristics']['precipitation']['annual'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Annual Precipitation</li>';
 	site_attributes['focusDesignScale']['parameters'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Observed properties</li>';
 	site_attributes['focusDesignScale']['experiments']['design'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Design of Experiments</li>';
