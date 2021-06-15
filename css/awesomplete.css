@@ -1,6 +1,5 @@
 .awesomplete [hidden] {
     display: none;
-	text-align: center;
 }
 
 .awesomplete .visually-hidden {
@@ -15,16 +14,6 @@
 
 .awesomplete > input {
     display: block;
-    background-color: #ffffff;
-    border: 1px solid #ccc
-    -webkit-border-radius: 5px;
-       -moz-border-radius: 5px;
-            border-radius: 5px;
-    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-       -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    padding: 0.5em;
-	width: 250px;
 }
 
 .awesomplete > ul {
@@ -47,7 +36,7 @@
 	border-radius: .3em;
 	margin: .2em 0 0;
 	background: hsla(0,0%,100%,.9);
-	background: white;
+	background: linear-gradient(to bottom right, white, hsla(0,0%,100%,.8));
 	border: 1px solid rgba(0,0,0,.3);
 	box-shadow: .05em .2em .6em rgba(0,0,0,.2);
 	text-shadow: none;
@@ -91,8 +80,8 @@
 	}
 	
 	.awesomplete > ul > li:hover {
-		background: #f5f5f5;
-		color: #333;
+		background: hsl(200, 40%, 80%);
+		color: black;
 	}
 	
 	.awesomplete > ul > li[aria-selected="true"] {
