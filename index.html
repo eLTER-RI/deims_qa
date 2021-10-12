@@ -212,13 +212,13 @@
 							number_of_issues++;
 						}
 						else {
-							var check_lon = coords_geom.getY();
-							var check_lat = coords_geom.getX();
+							var check_lat = coords_geom.getY();
+							var check_lon = coords_geom.getX();
 							
-							if (check_lat > -180 && check_lat < 180 && check_lon < 90 && check_lon > -90) {
+							if (check_lat >= -180 && check_lat <= 180 && check_lon <= 90 && check_lon >= -90) {
 								document.getElementById('coordinates_check_result').innerHTML = '<div class="text-success">✓</div>';
 								$('#coordinates_check_row').removeClass().addClass('table-success');
-								}
+							}
 							else {
 								$('#coordinates_check_row').removeClass().addClass('table-warning');
 								document.getElementById('coordinates_check_result').innerHTML = '<div class="custom_warning_text">The coordinates are out of the recommended value range</div>';
