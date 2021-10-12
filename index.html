@@ -41,6 +41,10 @@
 			  <td><b>Overall Completeness</b><br><sub>based on the list of <a href="https://deims.org/docs/site.html#site-completeness-measure" class="no_underline_link">recommended fields</a></sub></td>
 			  <td id="completeness_check_result"></td>
 			</tr>
+			<tr id="coordinates_check_row" class="table-active">
+			  <td><b>Coordinates</b></td>
+			  <td id="coordinates_check_result"></td>
+			</tr>
 			<tr id="boundaries_check_row" class="table-active">
 			  <td><b>Boundaries</b></td>
 			  <td id="boundaries_check_result"></td>
@@ -181,6 +185,53 @@
 
 				calculate_completeness(jsonObj);
 				
+				// check coordinates
+				if (jsonObj["attributes"]["geographic"]["coordinates"] == null) {
+					document.getElementById('coordinates_check_result').innerHTML = '<div class="text-danger">No coordinates provided</div>';
+					$('#coordinates_check_row').removeClass().addClass('table-danger');
+					number_of_issues++;
+				}
+				
+				// 
+				else {
+					var wkt_reader = new jsts.io.WKTReader();
+					try {
+						var coords_geom = wkt_reader.read(jsonObj["attributes"]["geographic"]["coordinates"])
+						var geojson_writer = new jsts.io.GeoJSONWriter();
+						var coordinates_geojson = geojson_writer.write(coords_geom);
+					}
+					catch(err) {
+						document.getElementById("coordinates_check_result").innerHTML = '<div class="text-danger">The geometry is not valid: ' + err.message + '</div>';
+						$('#coordinates_check_row').removeClass().addClass('table-danger');
+					}
+
+					if (coords_geom.isValid()) {
+						if (coords_geom.getGeometryType() != "Point") {
+							document.getElementById('coordinates_check_result').innerHTML = '<div class="text-danger">The provided geometry is not a point</div>';
+							$('#coordinates_check_row').removeClass().addClass('table-danger');
+							number_of_issues++;
+						}
+						else {
+							var check_lat = coords_geom.getY(); //lat
+							var check_lon = coords_geom.getX(); //lon
+							
+							if (check_lat > -180 && check_lat < 180 && check_lon < 90 && check_lon > -90) {
+								document.getElementById('coordinates_check_result').innerHTML = '<div class="text-success">✓</div>';
+								$('#coordinates_check_row').removeClass().addClass('table-success');
+								}
+							else {
+								$('#coordinates_check_row').removeClass().addClass('table-warning');
+								document.getElementById('coordinates_check_result').innerHTML = '<div class="custom_warning_text">The coordinates are out of the recommended value range</div>';
+							}
+						}
+					}
+					else {
+						document.getElementById('coordinates_check_result').innerHTML = '<div class="text-danger">The coordinates are not valid</div>';
+						$('#coordinates_check_row').removeClass().addClass('table-danger');
+						number_of_issues++;
+					}
+				}
+				
 				// check boundaries
 				if (jsonObj["attributes"]["geographic"]["boundaries"] == null) {
 					document.getElementById('boundaries_check_result').innerHTML = '<div class="text-danger">No boundaries provided</div>';
@@ -191,10 +242,8 @@
 					var wkt_reader = new jsts.io.WKTReader();
 					try {
 						var geom = wkt_reader.read(jsonObj["attributes"]["geographic"]["boundaries"]);
-						var coords_geom = wkt_reader.read(jsonObj["attributes"]["geographic"]["coordinates"])
 						var geojson_writer = new jsts.io.GeoJSONWriter();
 						var boundaries_geojson = geojson_writer.write(geom);
-						var coordinates_geojson = geojson_writer.write(coords_geom);
 					}
 					catch(err) {
 						document.getElementById("boundaries_check_result").innerHTML = '<div class="text-danger">The geometry is not valid: ' + err.message + '</div>';
