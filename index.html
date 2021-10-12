@@ -212,10 +212,13 @@
 							number_of_issues++;
 						}
 						else {
-							var check_lon = coords_geom.getY();
-							var check_lat = coords_geom.getX();
+							var check_lat = coords_geom.getY();
+							var check_lon = coords_geom.getX();
 							
-							if (check_lat >= -180 && check_lat <= 180 && check_lon <= 90 && check_lon >= -90) {
+							if (check_lat >= -90 && check_lat <= 90 && check_lon <= 180 && check_lon >= -180) {
+								document.getElementById('coordinates_check_result').innerHTML = '<div class="text-success">✓</div>';
+								$('#coordinates_check_row').removeClass().addClass('table-success');
+							}
 								document.getElementById('coordinates_check_result').innerHTML = '<div class="text-success">✓</div>';
 								$('#coordinates_check_row').removeClass().addClass('table-success');
 							}
