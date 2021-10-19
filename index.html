@@ -77,6 +77,10 @@
 				<td><b>Parent Site</b></td>
 				<td id="parent_check_result"></td>
 			</tr>
+			<tr id="images_check_row" class="table-active">
+				<td><b>Images</b></td>
+				<td id="images_check_result"></td>
+			</tr>
 		  </tbody>
 		</table>
 	  
@@ -383,6 +387,32 @@
 					$('#topology_check_row').removeClass().addClass('table-active');
 					document.getElementById('topology_check_result').innerHTML = '<div>Cannot be checked without coordinates/boundaries</div>';
 				}
+
+				// images
+				if (jsonObj["attributes"]["general"]["images"]) {
+
+					var image_check_variable = 0;
+					for (let i = 0; i < jsonObj["attributes"]["general"]["images"].length; i++) {
+						if (jsonObj["attributes"]["general"]["images"][i]["alt"] == "not defined") {
+							image_check_variable++;
+						}
+					}
+					if (image_check_variable == 0) {
+						document.getElementById('images_check_result').innerHTML = '<div class="text-success">✓</div>';
+						$('#images_check_row').removeClass().addClass('table-success');
+					}
+					else {
+						document.getElementById('images_check_result').innerHTML = '<div class="text-danger">The descriptive text of ' + image_check_variable + ' images is insufficient. </div>';
+						$('#images_check_row').removeClass().addClass('table-danger');
+						number_of_issues++;
+					}
+					
+				}
+				else {
+					$('#images_check_row').removeClass().addClass('table-warning');
+					document.getElementById('images_check_result').innerHTML = '<div class="custom_warning_text">There are no images for this site.</div>';
+					number_of_potential_issues++;
+				}
 				
 				
 				document.getElementById('results_summary_container').innerHTML = "";
@@ -413,6 +443,5 @@
 		return true;   
 
 	}
-
 		
 </script>
