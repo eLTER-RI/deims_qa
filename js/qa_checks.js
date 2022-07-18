@@ -20,7 +20,7 @@ function calculate_completeness(jsonObj) {
 	site_attributes['environmentalCharacteristics']['biome'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Biome</li>';
 	site_attributes['environmentalCharacteristics']['ecosystemType'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Ecosystem Type</li>';
 	site_attributes['environmentalCharacteristics']['precipitation']['annual'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Annual Precipitation</li>';
-	site_attributes['focusDesignScale']['parameters'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Observed properties</li>';
+	site_attributes['focusDesignScale']['observedProperties'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Observed properties</li>';
 	site_attributes['focusDesignScale']['experiments']['design'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Design of Experiments</li>';
 	site_attributes['focusDesignScale']['experiments']['scale'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Scale of Experiments</li>';
 	site_attributes['focusDesignScale']['observations']['design'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Design of Observations</li>';
