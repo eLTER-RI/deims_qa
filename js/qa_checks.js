@@ -16,10 +16,10 @@ function calculate_completeness(jsonObj) {
 	site_attributes['geographic']['elevation']['min'] != null ? number_of_filled_fields++ : list_of_missing_fields += '<li>Elevation (min)</li>';
 	site_attributes['geographic']['elevation']['max'] != null ? number_of_filled_fields++ : list_of_missing_fields += '<li>Elevation (max)</li>';
 	site_attributes['geographic']['size']['value'] != null ? number_of_filled_fields++ : list_of_missing_fields += '<li>Size</li>';
-	site_attributes['environmentalCharacteristics']['airTemperature']['yearlyAverage'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Air Temperature (avg)</li>';
+	site_attributes['environmentalCharacteristics']['airTemperature']['yearlyAverage'] != null ? number_of_filled_fields++ : list_of_missing_fields += '<li>Air Temperature (avg)</li>';
 	site_attributes['environmentalCharacteristics']['biome'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Biome</li>';
 	site_attributes['environmentalCharacteristics']['ecosystemType'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Ecosystem Type</li>';
-	site_attributes['environmentalCharacteristics']['precipitation']['yearlyAverage'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Annual Precipitation</li>';
+	site_attributes['environmentalCharacteristics']['precipitation']['yearlyAverage'] != null ? number_of_filled_fields++ : list_of_missing_fields += '<li>Annual Precipitation</li>';
 	site_attributes['focusDesignScale']['observedProperties'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Observed properties</li>';
 	site_attributes['focusDesignScale']['experiments']['design'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Design of Experiments</li>';
 	site_attributes['focusDesignScale']['experiments']['scale'] ? number_of_filled_fields++ : list_of_missing_fields += '<li>Scale of Experiments</li>';
