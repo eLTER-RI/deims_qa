@@ -73,9 +73,9 @@
 				<td><b>Affiliation</b></td>
 				<td id="affiliation_check_result"></td>
 			</tr>
-			<tr id="parent_check_row" class="table-active">
+			<tr id="relateSite_check_row" class="table-active">
 				<td><b>Parent Site</b></td>
-				<td id="parent_check_result"></td>
+				<td id="relateSite_check_result"></td>
 			</tr>
 			<tr id="images_check_row" class="table-active">
 				<td><b>Images</b></td>
@@ -360,15 +360,28 @@
 					document.getElementById('size_check_result').innerHTML = '<div class="text-success">✓</div>';
 				}
 				
-				// parent site
-				if (jsonObj["attributes"]["general"]["hierarchy"]["parent"] != null && jsonObj["attributes"]["general"]["hierarchy"]["parent"][0]["id"]["suffix"] == deims_id ) {
-					document.getElementById('parent_check_result').innerHTML = '<div class="text-danger">Circular reference: The site is its own parent.</div>';
-					$('#parent_check_row').removeClass().addClass('table-danger');
-					number_of_issues++;
+				
+				// related sites
+				var relationship_correct = true;
+				if (jsonObj["attributes"]["general"]["relatedSites"])  {
+					for (var i = 0; i < jsonObj["attributes"]["general"]["relatedSites"].length; i++) {
+						for (var j = 0; j < jsonObj["attributes"]["general"]["relatedSites"][i]["listOfSites"].length; j++) {
+							if (jsonObj["attributes"]["general"]["relatedSites"][i]["listOfSites"][j]["id"]["suffix"] == deims_id) {
+								relationship_correct = false;
+								break;
+							}
+						}
+					}
+				}
+				if (relationship_correct == true) {
+					$('#relateSite_check_row').removeClass().addClass('table-success');
+					document.getElementById('relateSite_check_result').innerHTML = '<div class="text-success">✓</div>';
 				}
 				else {
-					$('#parent_check_row').removeClass().addClass('table-success');
-					document.getElementById('parent_check_result').innerHTML = '<div class="text-success">✓</div>';
+					number_of_issues++;
+					document.getElementById('relateSite_check_result').innerHTML = '<div class="text-danger">Circular reference: The site has a relationship with itself.</div>';
+					$('#relateSite_check_row').removeClass().addClass('table-danger');
+					number_of_issues++;
 				}
 				
 				// check geographic topology
