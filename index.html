@@ -333,7 +333,7 @@
 					}
 
 					if (affiliation_issue_found) {
-						document.getElementById('affiliation_check_result').innerHTML = '<div class="custom_warning_text">There is unverified network/RI affiliation</div>';
+						document.getElementById('affiliation_check_result').innerHTML = '<div class="custom_warning_text">Not every membership of this site with the listed network(s) has been verified. DEIMS can currently verify memberships with all LTER networks (and national equivalents), ICP Forests, ICP IM and NEON.</div>';
 						$('#affiliation_check_row').removeClass().addClass('table-warning');
 						number_of_potential_issues++;
 					}
@@ -359,7 +359,6 @@
 					$('#size_check_row').removeClass().addClass('table-success');
 					document.getElementById('size_check_result').innerHTML = '<div class="text-success">✓</div>';
 				}
-				
 				
 				// related sites
 				var relationship_correct = true;
