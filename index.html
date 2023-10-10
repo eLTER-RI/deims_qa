@@ -325,17 +325,15 @@
 				}
 				else {
 					var affiliation_issue_found = false;
-					var not_verified_networks = '';
 					for (var i = 0; i < jsonObj["attributes"]["affiliation"]["networks"].length; i++) {
 						if (jsonObj["attributes"]["affiliation"]["networks"][i]["verified"] == false) {
 							affiliation_issue_found = true;
-							not_verified_networks+= jsonObj["attributes"]["affiliation"]["networks"][i]["name"]
-							not_verified_networks+= ", "
+							break;
 						}
 					}
 
 					if (affiliation_issue_found) {
-						document.getElementById('affiliation_check_result').innerHTML = '<div class="custom_warning_text">Not every membership of the listed network(s) (' + not_verified_networks.slice(0, -2) + ') has been verified.<br><sub>If you want to change that please get in touch with the respective network coordinator.<br>DEIMS can currently verify memberships with all LTER networks (and national equivalents), ICP Forests, ICP IM and NEON.</sub></div>';
+						document.getElementById('affiliation_check_result').innerHTML = '<div class="custom_warning_text">Not every membership of the listed network(s) has been verified.<br><sub>If you want to change that please get in touch with the respective network coordinator.<br>DEIMS can currently verify memberships with all LTER networks (and national equivalents), ICP Forests, ICP IM and NEON.</sub></div>';
 						$('#affiliation_check_row').removeClass().addClass('table-warning');
 						number_of_potential_issues++;
 					}
