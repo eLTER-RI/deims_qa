@@ -225,7 +225,7 @@
 							}
 							else {
 								$('#coordinates_check_row').removeClass().addClass('table-warning');
-								document.getElementById('coordinates_check_result').innerHTML = '<div class="custom_warning_text">The coordinates are out of the recommended value range</div>';
+								document.getElementById('coordinates_check_result').innerHTML = '<div class="custom_warning_text">The coordinates are beyond the recommended value range</div>';
 							}
 						}
 					}
@@ -390,7 +390,7 @@
 						$('#topology_check_row').removeClass().addClass('table-success');
 					}
 					else {
-						document.getElementById('topology_check_result').innerHTML = '<div class="text-danger">The centroid coordinates are outside of the provided boundaries.</div>';
+						document.getElementById('topology_check_result').innerHTML = '<div class="text-danger">The centroid/representative coordinates are outside of the provided boundaries.</div>';
 						$('#topology_check_row').removeClass().addClass('table-danger');
 						number_of_issues++;
 					}	
