@@ -248,6 +248,7 @@
 						var geom = wkt_reader.read(jsonObj["attributes"]["geographic"]["boundaries"]);
 						var geojson_writer = new jsts.io.GeoJSONWriter();
 						var boundaries_geojson = geojson_writer.write(geom);
+						var geom_type = geom.getGeometryType();
 					}
 					catch(err) {
 						document.getElementById("boundaries_check_result").innerHTML = '<div class="text-danger">The geometry is not valid: ' + err.message + '</div>';
@@ -255,8 +256,18 @@
 					}
 
 					if (geom.isValid()) {
-						document.getElementById('boundaries_check_result').innerHTML = '<div class="text-success">✓</div>';
-						$('#boundaries_check_row').removeClass().addClass('table-success');
+					
+						if (geom_type == "Polygon" || geom_type == "MultiPolygon") {
+							document.getElementById('boundaries_check_result').innerHTML = '<div class="text-success">✓</div>';
+							$('#boundaries_check_row').removeClass().addClass('table-success');
+						}
+						else {
+							document.getElementById('boundaries_check_result').innerHTML = '<div class="custom_warning_text">The is an issue with the geometry type. This can break the export functionality</div>';
+							document.getElementById('boundaries_check_result').innerHTML = '<div class="custom_warning_text">The is an issue with the geometry type. This can break the export functionality</div>';
+							$('#boundaries_check_row').removeClass().addClass('table-warning');
+							number_of_potential_issues++;
+						}
+					
 					}
 					else {
 						document.getElementById('boundaries_check_result').innerHTML = '<div class="text-danger">The boundaries are not valid</div>';
