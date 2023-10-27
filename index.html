@@ -262,8 +262,7 @@
 							$('#boundaries_check_row').removeClass().addClass('table-success');
 						}
 						else {
-							document.getElementById('boundaries_check_result').innerHTML = '<div class="custom_warning_text">The is an issue with the geometry type. This can break the export functionality</div>';
-							document.getElementById('boundaries_check_result').innerHTML = '<div class="custom_warning_text">The is an issue with the geometry type. This can break the export functionality</div>';
+							document.getElementById('boundaries_check_result').innerHTML = '<div class="custom_warning_text">This field should contain a polygon or multi polygon. Other geometry types can break the export functionality.</div>';
 							$('#boundaries_check_row').removeClass().addClass('table-warning');
 							number_of_potential_issues++;
 						}
