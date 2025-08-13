@@ -237,7 +237,7 @@
 				
 				// check boundaries
 				if (jsonObj["attributes"]["geographic"]["boundaries"] == null) {
-					document.getElementById('boundaries_check_result').innerHTML = '<div class="text-danger">No boundaries provided</div>';
+					document.getElementById('boundaries_check_result').innerHTML = '<div class="text-danger">No boundaries provided. (Even though not mandatory adding boundaries information is strongly recommended.)</div>';
 					$('#boundaries_check_row').removeClass().addClass('table-danger');
 					number_of_issues++;
 				}
@@ -466,3 +466,4 @@
 	}
 		
 </script>
+
