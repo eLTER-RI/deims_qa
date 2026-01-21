@@ -448,7 +448,7 @@
 						summary_text = '<div class="text-danger">We found ' + number_of_issues + ' critical issue(s).</div>';
 					}
 					if (number_of_potential_issues != 0) {
-						summary_text += '<div class="text-warning">We found ' + number_of_potential_issues + ' potential issue(s).</div>';
+						summary_text += '<div class="custom_warning_text">We found ' + number_of_potential_issues + ' potential issue(s).</div>';
 					}
 					document.getElementById('results_summary_container').innerHTML = summary_text;
 				}
@@ -470,6 +470,7 @@
 	}
 		
 </script>
+
 
 
 
