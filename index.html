@@ -442,11 +442,15 @@
 				if (number_of_issues == 0 && number_of_potential_issues == 0) {
 					document.getElementById('results_summary_container').innerHTML = "<div class='text-success'>We didn't find any issues with this record.</div>";
 				}
-				if (number_of_issues != 0) {
-					document.getElementById('results_summary_container').innerHTML = '<div class="text-danger">We found ' + number_of_issues + ' critical issue(s).</div>';
-				}
-				if (number_of_potential_issues != 0) {
-					document.getElementById('results_summary_container').innerHTML += '<div class="text-warning">We found ' + number_of_potential_issues + ' potential issue(s).</div>';
+				else {
+					var summary_text = '';
+					if (number_of_issues != 0) {
+						summary_text = '<div class="text-danger">We found ' + number_of_issues + ' critical issue(s).</div>';
+					}
+					if (number_of_potential_issues != 0) {
+						dsummary_text += '<div class="text-warning">We found ' + number_of_potential_issues + ' potential issue(s).</div>';
+					}
+					document.getElementById('results_summary_container').innerHTML = summary_text;
 				}
 				
 			}
@@ -466,6 +470,7 @@
 	}
 		
 </script>
+
 
 
 
