@@ -435,15 +435,15 @@
 					number_of_potential_issues++;
 				}
 				
-				
-				document.getElementById('results_summary_container').innerHTML = "";
+				document.getElementById('results_summary_container').innerHTML = '';
+				var summary_text = "<p>We found:</p>";
 
 				// print result summary
 				if (number_of_issues == 0 && number_of_potential_issues == 0) {
-					document.getElementById('results_summary_container').innerHTML = '<p>We found:</p><table class="table d-inline-block"><tr class="table-success"><td><div class="text-success">0 issues :)</div></td></tr></table>';
+					summary_text = '<table class="table d-inline-block"><tr class="table-success"><td><div class="text-success">0 issues :)</div></td></tr></table>';
 				}
 				else {
-					var summary_text = '<p>We found:</p><table class="table d-inline-block">';
+					var summary_text = '<table class="table d-inline-block">';
 					if (number_of_issues > 0) {
 						if (number_of_issues == 1) {
 							summary_text += '<tr class="table-danger"><td><div class="text-danger">1 critical issue.</div></td></tr>';
@@ -461,8 +461,8 @@
 						}
 					}
 					summary_text += '</table>';
-					document.getElementById('results_summary_container').innerHTML = summary_text;
 				}
+				document.getElementById('results_summary_container').innerHTML = summary_text;
 				
 			}
 			// if there is something wrong with the json request
@@ -481,6 +481,7 @@
 	}
 		
 </script>
+
 
 
 
