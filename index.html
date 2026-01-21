@@ -237,9 +237,9 @@
 				
 				// check boundaries
 				if (jsonObj["attributes"]["geographic"]["boundaries"] == null) {
-					document.getElementById('boundaries_check_result').innerHTML = '<div class="text-danger">No boundaries provided. (Even though not mandatory adding boundaries information is strongly recommended.)</div>';
-					$('#boundaries_check_row').removeClass().addClass('table-danger');
-					number_of_issues++;
+					document.getElementById('boundaries_check_result').innerHTML = '<div class="text-warning">No boundaries provided. (Even though not mandatory adding boundaries information is strongly recommended.)</div>';
+					$('#boundaries_check_row').removeClass().addClass('table-warning');
+					number_of_potential_issues++;
 				}
 				else {
 					var wkt_reader = new jsts.io.WKTReader();
@@ -466,5 +466,4 @@
 	}
 		
 </script>
-
 
