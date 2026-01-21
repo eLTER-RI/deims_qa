@@ -446,10 +446,10 @@
 					var summary_text = 'We found<br>';
 					if (number_of_issues > 0) {
 						if (number_of_issues == 1) {
-							summary_text = '<div class="text-danger">- 1 critical issue.</div>';
+							summary_text += '<div class="text-danger">- 1 critical issue.</div>';
 						}
 						else {
-							summary_text = '<div class="text-danger">- ' + number_of_issues + ' critical issues</div>';
+							summary_text += '<div class="text-danger">- ' + number_of_issues + ' critical issues</div>';
 						}
 					}
 					if (number_of_potential_issues > 0) {
@@ -480,6 +480,7 @@
 	}
 		
 </script>
+
 
 
 
