@@ -444,11 +444,21 @@
 				}
 				else {
 					var summary_text = '';
-					if (number_of_issues != 0) {
-						summary_text = '<div class="text-danger">We found ' + number_of_issues + ' critical issue(s).</div>';
+					if (number_of_issues > 0) {
+						if (number_of_issues == 1) {
+							summary_text = '<div class="text-danger">We found 1 critical issue.</div>';
+						}
+						else {
+							summary_text = '<div class="text-danger">We found ' + number_of_issues + ' critical issues.</div>';
+						}
 					}
-					if (number_of_potential_issues != 0) {
-						summary_text += '<div class="custom_warning_text">We found ' + number_of_potential_issues + ' potential issue(s).</div>';
+					if (number_of_potential_issues > 0) {
+						if (number_of_potential_issues == 1) {
+							summary_text += '<div class="text-danger">We found 1 pontetial issue.</div>';
+						}
+						else {
+							summary_text += '<div class="text-danger">We found ' + number_of_potential_issues + ' potential issues.</div>';
+						}
 					}
 					document.getElementById('results_summary_container').innerHTML = summary_text;
 				}
@@ -470,6 +480,7 @@
 	}
 		
 </script>
+
 
 
 
