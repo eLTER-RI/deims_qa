@@ -35,19 +35,19 @@ body {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
-.qa-table-wrapper .table-active {
-    --bs-table-bg: #ffffff;
-    --bs-table-active-bg: #ffffff;
-    background-color: #ffffff;
-}
-
-.qa-table-wrapper .table-active > td {
-    background-color: #ffffff;
-}
-
 .qa-table-wrapper .table {
     margin-bottom: 0;
     border-radius: 0;
+}
+
+/* White initial background for unresolved rows */
+.qa-table-wrapper tr.table-active:not(.table-success):not(.table-danger):not(.table-warning) > td {
+    background-color: #ffffff;
+}
+
+/* Neutral grey — matches Bootstrap's original table-active tint */
+.table-neutral > td {
+    background-color: #f2f2f2;
 }
 
 .qa-table-wrapper .table > :not(caption) > * > * {
@@ -100,12 +100,4 @@ body {
 
 #results_summary_container .table tr:last-child td {
     border-bottom: none;
-}
-
-.table-neutral {
-    --bs-table-bg: rgba(0, 0, 0, 0.05);
-}
-
-.table-neutral > td {
-    background-color: #f2f2f2;
 }
