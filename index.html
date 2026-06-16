@@ -322,7 +322,7 @@
 					qualifies_for_spotlight = false;
 					number_of_issues++;
 				}
-				else if ((jsonObj["attributes"]["focusDesignScale"]["observedProperties"]).length < 5) {
+				else if ((jsonObj["attributes"]["focusDesignScale"]["observedProperties"]).length < 6) {
 					document.getElementById('observed_properties_check_result').innerHTML = '<div class="custom_warning_text">Only few observed properties provided.</div>';
 					$('#observed_properties_check_row').removeClass().addClass('table-warning');
 					qualifies_for_spotlight = false;
