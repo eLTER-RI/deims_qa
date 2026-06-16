@@ -33,7 +33,12 @@ body {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.qa-table-wrapper .table-active {
+    --bs-table-bg: #ffffff;
     --bs-table-active-bg: #ffffff;
+    background-color: #ffffff;
 }
 
 .qa-table-wrapper .table {
