@@ -339,7 +339,7 @@
 				// affiliation
 				if (jsonObj["attributes"]["affiliation"]["networks"] == null) {
 					// no affiliation available
-					$('#affiliation_check_row').removeClass().addClass('table-active');
+					$('#affiliation_check_row').removeClass().addClass('table-neutral');
 					document.getElementById('affiliation_check_result').innerHTML = '<div>No network/RI affiliation provided or existent</div>';
 					qualifies_for_spotlight = false;
 				}
@@ -422,7 +422,7 @@
 					}	
 				}
 				else {
-					$('#topology_check_row').removeClass().addClass('table-neutral');
+					$('#topology_check_row').removeClass().addClass('table-active');
 					document.getElementById('topology_check_result').innerHTML = '<div>Cannot be checked without coordinates/boundaries</div>';
 				}
 
