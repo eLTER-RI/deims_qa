@@ -41,6 +41,10 @@ body {
     background-color: #ffffff;
 }
 
+.qa-table-wrapper .table-active > td {
+    background-color: #ffffff;
+}
+
 .qa-table-wrapper .table {
     margin-bottom: 0;
     border-radius: 0;
