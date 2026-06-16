@@ -38,51 +38,51 @@
 			</tr>
 		  </thead>
 		  <tbody>
-		    <tr id="completeness_check_row" class="table-active">
+		    <tr id="completeness_check_row" class="table-white">
 			  <td><b>Overall Completeness</b><br><sub>based on the list of <a href="https://deims.org/docs/site.html#site-completeness-measure" class="no_underline_link">recommended fields</a></sub></td>
 			  <td id="completeness_check_result"></td>
 			</tr>
-			<tr id="spotlight_check_row" class="table-active">
+			<tr id="spotlight_check_row" class="table-white">
 			  <td><b>Qualifies for "Spotlight On"</b><br><sub>based on the <a href="https://deims.org/docs/site.html#the-spotlight-on-feature" class="no_underline_link">defined criteria</a></sub></td>
 			  <td id="spotlight_check_result"></td>
 			</tr>
-			<tr id="coordinates_check_row" class="table-active">
+			<tr id="coordinates_check_row" class="table-white">
 			  <td><b>Coordinates</b></td>
 			  <td id="coordinates_check_result"></td>
 			</tr>
-			<tr id="boundaries_check_row" class="table-active">
+			<tr id="boundaries_check_row" class="table-white">
 			  <td><b>Boundaries</b></td>
 			  <td id="boundaries_check_result"></td>
 			</tr>
-			<tr id="topology_check_row" class="table-active">
+			<tr id="topology_check_row" class="table-white">
 			  <td><b>Geospatial Topology</b></td>
 			  <td id="topology_check_result"></td>
 			</tr>
-			<tr id="shortname_check_row" class="table-active">
+			<tr id="shortname_check_row" class="table-white">
 			  <td><b>Short Name</b></td>
 			  <td id="shortname_check_result"></td>
 			</tr>
-			<tr id="abstract_check_row" class="table-active">
+			<tr id="abstract_check_row" class="table-white">
 			  <td><b>Abstract</b></td>
 			  <td id="abstract_check_result"></td>
 			</tr>
-			<tr id="observed_properties_check_row" class="table-active">
+			<tr id="observed_properties_check_row" class="table-white">
 				<td><b>Observed Properties</b></td>
 				<td id="observed_properties_check_result"></td>
 			</tr>
-			<tr id="size_check_row" class="table-active">
+			<tr id="size_check_row" class="table-white">
 			  <td><b>Size</b></td>
 			  <td id="size_check_result"></td>
 			</tr>
-			<tr id="affiliation_check_row" class="table-active">
+			<tr id="affiliation_check_row" class="table-white">
 				<td><b>Affiliation</b></td>
 				<td id="affiliation_check_result"></td>
 			</tr>
-			<tr id="relateSite_check_row" class="table-active">
+			<tr id="relateSite_check_row" class="table-white">
 				<td><b>Related Site(s)</b></td>
 				<td id="relateSite_check_result"></td>
 			</tr>
-			<tr id="images_check_row" class="table-active">
+			<tr id="images_check_row" class="table-white">
 				<td><b>Images</b></td>
 				<td id="images_check_result"></td>
 			</tr>
@@ -422,7 +422,7 @@
 					}	
 				}
 				else {
-					$('#topology_check_row').removeClass().addClass('table-active');
+					$('#topology_check_row').removeClass().addClass('table-neutral');
 					document.getElementById('topology_check_result').innerHTML = '<div>Cannot be checked without coordinates/boundaries</div>';
 				}
 
