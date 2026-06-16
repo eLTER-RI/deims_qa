@@ -27,38 +27,28 @@ body {
     width: 250px;
 }
 
-/* ── Main QA table wrapper: rounded corners + white background ── */
+/* ── Main QA table wrapper ── */
 .qa-table-wrapper {
     border: 1px solid #dee2e6;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-    background-color: #ffffff;
+    --bs-table-active-bg: #ffffff;
 }
 
-/* Remove Bootstrap's outer border since the wrapper handles it */
 .qa-table-wrapper .table {
     margin-bottom: 0;
     border-radius: 0;
 }
 
-/* White background for table-active rows (overrides Bootstrap's gray tint) */
-.qa-table-wrapper .table-active {
-    --bs-table-bg: #ffffff;
-    --bs-table-color: inherit;
-}
-
-/* Soften the default Bootstrap cell borders */
 .qa-table-wrapper .table > :not(caption) > * > * {
     border-bottom-color: rgba(0, 0, 0, 0.06);
 }
 
-/* Last row: no border bleed against the rounded wrapper */
 .qa-table-wrapper .table tbody tr:last-child td {
     border-bottom: none;
 }
 
-/* Subtle thead tint */
 .qa-table-wrapper .table thead tr th {
     background-color: #f8f9fa;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -78,7 +68,6 @@ body {
     display: none;
 }
 
-/* "We found:" label sits outside the frame, plain and muted */
 #results_summary_container > p:first-child {
     font-weight: 500;
     color: #6c757d;
@@ -86,7 +75,6 @@ body {
     margin-bottom: 0.5rem;
 }
 
-/* Frame + shrink-to-content on the inner table only */
 #results_summary_container .table.d-inline-block {
     width: auto;
     border: 1px solid #dee2e6;
