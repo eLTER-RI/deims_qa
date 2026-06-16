@@ -345,11 +345,14 @@
 					var at_least_one_network_verified = false;
 					for (var i = 0; i < jsonObj["attributes"]["affiliation"]["networks"].length; i++) {
 						if (jsonObj["attributes"]["affiliation"]["networks"][i]["verified"] == true) {
-							qualifies_for_spotlight = true;
+							at_least_one_network_verified = true;
 						}
 						else {
 							affiliation_issue_found = true;
 						}
+					}
+					if at_least_one_network_verified != true {
+						qualifies_for_spotlight = false;
 					}
 
 					if (affiliation_issue_found) {
