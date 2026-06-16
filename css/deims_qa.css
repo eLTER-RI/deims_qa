@@ -1,3 +1,16 @@
+body {
+    background-color: #f6f6f4;
+}
+
+.qa-table-wrapper {
+    background-color: #ffffff;
+}
+
+.qa-table-wrapper .table-active {
+    --bs-table-bg: #ffffff;
+    --bs-table-color: inherit;
+}
+
 .custom_warning_text {
 	color: #856404;
 }
@@ -58,38 +71,35 @@
       color: #6c757d;
     }
 
-    /* ── Results summary ── */
+    /* ── Results summary: card-style framing ── */
     #results_summary_container {
+      border: 1px solid #dee2e6;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
       margin-bottom: 1.5rem;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+      background-color: #fff;
     }
 
     #results_summary_container:empty {
       display: none;
     }
 
-    /* "We found:" label sits outside the frame, plain and muted */
+    /* Keep the inner summary table tight and borderless */
+    #results_summary_container .table {
+      margin-bottom: 0;
+      border: none;
+      box-shadow: none;
+    }
+
+    #results_summary_container .table td {
+      border: none;
+      padding: 0.35rem 0.75rem;
+    }
+
     #results_summary_container > p:first-child {
       font-weight: 500;
       color: #6c757d;
       font-size: 0.9rem;
       margin-bottom: 0.5rem;
-    }
-
-    /* Frame + shrink-to-content on the inner table only */
-    #results_summary_container .table.d-inline-block {
-      width: auto;
-      border: 1px solid #dee2e6;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-      margin-bottom: 0;
-    }
-
-    #results_summary_container .table td {
-      border-bottom-color: rgba(0, 0, 0, 0.06);
-      padding: 0.5rem 1.1rem;
-    }
-
-    #results_summary_container .table tr:last-child td {
-      border-bottom: none;
     }
