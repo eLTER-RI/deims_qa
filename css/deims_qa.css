@@ -36,13 +36,13 @@ body {
     border-radius: 0;
 }
 
-/* White background for all tbody cells by default */
-.qa-table-wrapper .table tbody td {
+/* Initial white rows */
+.qa-table-wrapper .table tr.table-white > td {
     background-color: #ffffff;
 }
 
-/* Neutral grey for rows explicitly set to table-neutral */
-.qa-table-wrapper .table tr.table-neutral td {
+/* Neutral grey — check could not be carried out */
+.qa-table-wrapper .table tr.table-neutral > td {
     background-color: #f2f2f2;
 }
 
