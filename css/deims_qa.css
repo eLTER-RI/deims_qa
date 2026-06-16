@@ -50,7 +50,7 @@ body {
     --bs-table-bg: #f2f2f2;
 }
 
-.table-neutral > td {
+.qa-table-wrapper tr.table-neutral > td {
     background-color: #f2f2f2;
 }
 
