@@ -101,3 +101,11 @@ body {
 #results_summary_container .table tr:last-child td {
     border-bottom: none;
 }
+
+.table-neutral {
+    --bs-table-bg: rgba(0, 0, 0, 0.05);
+}
+
+.table-neutral > td {
+    background-color: #f2f2f2;
+}
