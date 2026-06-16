@@ -46,6 +46,10 @@ body {
 }
 
 /* Neutral grey — matches Bootstrap's original table-active tint */
+.table-neutral {
+    --bs-table-bg: #f2f2f2;
+}
+
 .table-neutral > td {
     background-color: #f2f2f2;
 }
