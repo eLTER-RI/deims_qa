@@ -40,6 +40,10 @@
 			  <td><b>Overall Completeness</b><br><sub>based on the list of <a href="https://deims.org/docs/site.html#site-completeness-measure" class="no_underline_link">recommended fields</a></sub></td>
 			  <td id="completeness_check_result"></td>
 			</tr>
+			<tr id="spotlight_check_row" class="table-active">
+			  <td><b>Qualifies for "Spotlight On"</b><br><sub>based on the <a href="https://deims.org/docs/site.html#the-spotlight-on-feature" class="no_underline_link">defined criteria</a></sub></td>
+			  <td id="spotlight_check_result"></td>
+			</tr>
 			<tr id="coordinates_check_row" class="table-active">
 			  <td><b>Coordinates</b></td>
 			  <td id="coordinates_check_result"></td>
@@ -180,8 +184,10 @@
 				}
 				document.getElementById('deims_id_url_container').innerHTML = ' <a class="no_underline_link" href="https://deims.org/' + deims_id + '">' + 'https://deims.org/' + deims_id + '</a>'; 
 				
+				// set initial check vars
 				number_of_issues = 0;
 				number_of_potential_issues = 0;
+				qualifies_for_spotlight = true;
 				
 				// update url in address bar
 				history.pushState({}, "Site Record Quality Assurance Tool - " + jsonObj["title"], "?id=" + deims_id)
@@ -195,7 +201,6 @@
 					number_of_issues++;
 				}
 				
-				// 
 				else {
 					var wkt_reader = new jsts.io.WKTReader();
 					try {
@@ -314,11 +319,13 @@
 				if (jsonObj["attributes"]["focusDesignScale"]["observedProperties"] == null) {
 					document.getElementById('observed_properties_check_result').innerHTML = '<div class="text-danger">No observed properties provided.</div>';
 					$('#observed_properties_check_row').removeClass().addClass('table-danger');
+					qualifies_for_spotlight = false;
 					number_of_issues++;
 				}
 				else if ((jsonObj["attributes"]["focusDesignScale"]["observedProperties"]).length < 5) {
 					document.getElementById('observed_properties_check_result').innerHTML = '<div class="custom_warning_text">Only few observed properties provided.</div>';
 					$('#observed_properties_check_row').removeClass().addClass('table-warning');
+					qualifies_for_spotlight = false;
 					number_of_potential_issues++;
 				}
 				else {
@@ -331,13 +338,17 @@
 					// no affiliation available
 					$('#affiliation_check_row').removeClass().addClass('table-active');
 					document.getElementById('affiliation_check_result').innerHTML = '<div>No network/RI affiliation provided or existent</div>';
+					qualifies_for_spotlight = false;
 				}
 				else {
 					var affiliation_issue_found = false;
+					var at_least_one_network_verified = false;
 					for (var i = 0; i < jsonObj["attributes"]["affiliation"]["networks"].length; i++) {
-						if (jsonObj["attributes"]["affiliation"]["networks"][i]["verified"] == false) {
+						if (jsonObj["attributes"]["affiliation"]["networks"][i]["verified"] == true) {
+							qualifies_for_spotlight = true;
+						}
+						else {
 							affiliation_issue_found = true;
-							break;
 						}
 					}
 
@@ -411,6 +422,11 @@
 
 				// images
 				if (jsonObj["attributes"]["general"]["images"]) {
+				
+					// spotlight check
+					if (jsonObj["attributes"]["general"]["images"][0]["alt"].length < 15) {
+						qualifies_for_spotlight = false;
+					}
 
 					var image_check_variable = 0;
 					for (let i = 0; i < jsonObj["attributes"]["general"]["images"].length; i++) {
@@ -434,9 +450,31 @@
 					document.getElementById('images_check_result').innerHTML = '<div class="custom_warning_text">There are no images for this site.</div>';
 					number_of_potential_issues++;
 				}
-				
+								
 				document.getElementById('results_summary_container').innerHTML = '';
 				var summary_text = "<p>We found:</p>";
+				
+				// Current Spotlight criteria:
+				//
+				// Full completion (100%) of all recommended fields ✓
+				// Have a verified affiliation with at least one network on DEIMS ✓						
+				// Have at least one image of the site with a description of more than 15 characters ✓
+				// Have information on coordinates and elevation (msl), air temperature (avg), year established and biome (through completeness)  ✓
+				// Have more than 5 observed properties ticked ✓
+				//
+				if (document.getElementById('completeness_check_result').innerHTML != '<div class="text-success">100.00%</div>') {
+					qualifies_for_spotlight = false;
+				}
+				
+				if (qualifies_for_spotlight == true) {
+					document.getElementById('spotlight_check_result').innerHTML = '<div class="text-success">✓</div>';
+					$('#spotlight_check_row').removeClass().addClass('table-success');
+				}
+				else {
+					$('#spotlight_check_row').removeClass().addClass('table-warning');
+					document.getElementById('spotlight_check_result').innerHTML = '<div class="custom_warning_text">🞪</div>';
+					number_of_potential_issues++;
+				}
 
 				// print result summary
 				if (number_of_issues == 0 && number_of_potential_issues == 0) {
@@ -481,11 +519,3 @@
 	}
 		
 </script>
-
-
-
-
-
-
-
-
