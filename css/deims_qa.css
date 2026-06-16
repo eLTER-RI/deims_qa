@@ -3,7 +3,7 @@ body {
 }
 
 .custom_warning_text {
-	color: #856404;
+    color: #856404;
 }
 
 .no_underline_link {
@@ -15,14 +15,10 @@ body {
 }
 
 .awesomplete > input {
-	background-color: #ffffff;
-    border: 1px solid #ccc
-    -webkit-border-radius: 5px;
-       -moz-border-radius: 5px;
-            border-radius: 5px;
-    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-       -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     padding: 0.5em;
     width: 250px;
 }
@@ -40,17 +36,13 @@ body {
     border-radius: 0;
 }
 
-/* White initial background for unresolved rows */
-.qa-table-wrapper tr.table-active:not(.table-success):not(.table-danger):not(.table-warning) > td {
+/* White background for all tbody cells by default */
+.qa-table-wrapper .table tbody td {
     background-color: #ffffff;
 }
 
-/* Neutral grey — matches Bootstrap's original table-active tint */
-.table-neutral {
-    --bs-table-bg: #f2f2f2;
-}
-
-.qa-table-wrapper tr.table-neutral > td {
+/* Neutral grey for rows explicitly set to table-neutral */
+.qa-table-wrapper .table tr.table-neutral td {
     background-color: #f2f2f2;
 }
 
