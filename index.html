@@ -459,6 +459,7 @@
 					$('#images_check_row').removeClass().addClass('table-warning');
 					document.getElementById('images_check_result').innerHTML = '<div class="custom_warning_text">There are no images for this site.</div>';
 					number_of_potential_issues++;
+					qualifies_for_spotlight = false;
 				}
 								
 				document.getElementById('results_summary_container').innerHTML = '';
